@@ -9,8 +9,4 @@ public interface IStudentRepository
     Students? GetById (int id);
     void Update(Students student);
     void Delete(int id);
-    
-    // List<Students> GetByGrade(Grade grade);
-    
-    
 }

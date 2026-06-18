@@ -12,7 +12,7 @@ public class ConsoleMenu
         _studentService = studentService;
     }
     
-    public void Start()
+    public async Task Start()
     {
         while (true)
         {
@@ -26,6 +26,7 @@ public class ConsoleMenu
             Console.WriteLine("7. Sort Students By Name");
             Console.WriteLine("8. Calculate Average Grade");
             Console.WriteLine("9. Group Students By Grade");
+            Console.WriteLine("10. Fetch External Data for Student");
             Console.WriteLine("0. Exit");
 
             Console.Write("Enter your choice: ");
@@ -68,6 +69,10 @@ public class ConsoleMenu
                 case "9":
                     GropStudentsByGrade();
                     break;
+                
+                case "10":
+                    await FetchExternalDataForStudents();
+                    break;
 
                 case "0":
                     return;
@@ -105,6 +110,11 @@ public class ConsoleMenu
 
         _studentService.AddStudent(student);
         Console.WriteLine("Student added successfully.");
+    }
+    private async Task FetchExternalDataForStudents()
+    {
+        await _studentService.FetchExternalDataAsync();
+        Console.WriteLine("External data fetched and updated for students.");
     }
     private void GropStudentsByGrade()
     {

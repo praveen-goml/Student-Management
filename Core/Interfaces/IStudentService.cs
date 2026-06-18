@@ -16,5 +16,7 @@ public interface IStudentService
     
     Grade CalculateAverageGrade();
     
+    Task FetchExternalDataAsync();
+    
     
 }

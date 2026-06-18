@@ -3,6 +3,24 @@
     "Id": 1,
     "Name": "praveen",
     "Grade": 0,
+    "ExternalData": "autem hic labore sunt dolores incidunt"
+  },
+  {
+    "Id": 2,
+    "Name": "jani",
+    "Grade": 0,
+    "ExternalData": "dolorem dolore est ipsam"
+  },
+  {
+    "Id": 3,
+    "Name": "Gowtham",
+    "Grade": 1,
+    "ExternalData": "eum et est occaecati"
+  },
+  {
+    "Id": 4,
+    "Name": "karuppusamy",
+    "Grade": 0,
     "ExternalData": ""
   }
 ]

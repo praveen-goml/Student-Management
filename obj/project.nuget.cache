@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "MVqJ6PqZz0c=",
+  "dgSpecHash": "zxGhDvZ0Ky8=",
   "success": true,
   "projectFilePath": "C:\\Users\\iprav\\RiderProjects\\StudentManagement\\StudentManagement\\StudentManagement.csproj",
   "expectedPackageFiles": [
@@ -23,7 +23,11 @@
     "C:\\Users\\iprav\\.nuget\\packages\\microsoft.extensions.logging.console\\10.0.9\\microsoft.extensions.logging.console.10.0.9.nupkg.sha512",
     "C:\\Users\\iprav\\.nuget\\packages\\microsoft.extensions.options\\10.0.9\\microsoft.extensions.options.10.0.9.nupkg.sha512",
     "C:\\Users\\iprav\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\10.0.9\\microsoft.extensions.options.configurationextensions.10.0.9.nupkg.sha512",
-    "C:\\Users\\iprav\\.nuget\\packages\\microsoft.extensions.primitives\\10.0.9\\microsoft.extensions.primitives.10.0.9.nupkg.sha512"
+    "C:\\Users\\iprav\\.nuget\\packages\\microsoft.extensions.primitives\\10.0.9\\microsoft.extensions.primitives.10.0.9.nupkg.sha512",
+    "C:\\Users\\iprav\\.nuget\\packages\\serilog\\4.2.0\\serilog.4.2.0.nupkg.sha512",
+    "C:\\Users\\iprav\\.nuget\\packages\\serilog.extensions.logging\\10.0.0\\serilog.extensions.logging.10.0.0.nupkg.sha512",
+    "C:\\Users\\iprav\\.nuget\\packages\\serilog.sinks.console\\6.1.1\\serilog.sinks.console.6.1.1.nupkg.sha512",
+    "C:\\Users\\iprav\\.nuget\\packages\\serilog.sinks.file\\7.0.0\\serilog.sinks.file.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }

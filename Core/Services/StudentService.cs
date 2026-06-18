@@ -2,46 +2,52 @@
 using StudentManagement.Core.Models;
 
 namespace StudentManagement.Core.Services;
+using StudentManagement.Core.Exceptions;
+using Microsoft.Extensions.Logging;
 
 public class StudentService : IStudentService
 {
+    private readonly ILogger<StudentService> _logger;
     private readonly IStudentRepository _repository;
+    private readonly IExteneralApi _externalApiService;
 
-
-    public StudentService(IStudentRepository repository)
+    public StudentService(
+        IStudentRepository repository,
+        IExteneralApi externalApiService,
+        ILogger<StudentService> logger)
     {
-        _repository = repository;
+        _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+        _externalApiService = externalApiService ?? throw new ArgumentNullException(nameof(externalApiService));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
-
 
     public void AddStudent(Students student)
     {
         if (string.IsNullOrWhiteSpace(student.Name))
         {
+            _logger.LogInformation("Studen name is empty");
             throw new ArgumentException("Student name cannot be empty.");
         }
 
         var existingstudent = _repository.GetById(student.Id);
         if (existingstudent != null)
         {
-            throw new Exception("Student ID already exists");
+            _logger.LogInformation($"Student ID {existingstudent.Id} already exists");
+            throw new DuplicateStudentException(existingstudent.Id);
         }
 
         _repository.Add(student);
     }
-
 
     public List<Students> GetAllStudents()
     {
         return _repository.GetAll();
     }
 
-
     public Students? GetStudentById(int id)
     {
         return _repository.GetById(id);
     }
-
 
     public void UpdateStudent(Students student)
     {
@@ -54,7 +60,7 @@ public class StudentService : IStudentService
 
         if (existingStudent == null)
         {
-            throw new Exception("Student not found");
+            throw new StudentNotFoundException(student.Id);
         }
 
         _repository.Update(student);
@@ -64,18 +70,39 @@ public class StudentService : IStudentService
     {
         var students = _repository.GetAll();
         var sortedStudents = students.OrderBy(s => s.Name).Select(s => s.Name).ToList();
-
+        _logger.LogInformation("Students sorted by name successfully");
         return sortedStudents;
 
     }
     
+    public async Task FetchExternalDataAsync()
+    {
+        var students = _repository.GetAll();
+        
+
+        var tasks = students.Select(async student =>
+        {
+            student.ExternalData =
+                await _externalApiService.GetExternalDataAsync();
+        });
+        _logger.LogInformation("External data fetched successfully for students");
+
+        await Task.WhenAll(tasks);
+
+        foreach (Students student in students)
+        {
+            _repository.Update(student);
+        }
+        _logger.LogInformation("Students updated successfully with external data");
+    }
+    
     public List<Students> GetStudentsByGrade(Grade grade)
     {
+        _logger.LogInformation($"Students retrieved successfully by grade {grade}");
         return _repository.GetAll()
             .Where(g => g.Grade == grade)
             .ToList();
     }
-
 
     public void DeleteStudent(int id)
     {
@@ -83,7 +110,7 @@ public class StudentService : IStudentService
 
         if (student == null)
         {
-            throw new Exception("Student not found");
+            throw new StudentNotFoundException(id);
         }
 
         _repository.Delete(id);
@@ -102,6 +129,7 @@ public class StudentService : IStudentService
                 Grade.F => 0,
                 _ => 0
             });
+        _logger.LogInformation("Average grade calculated successfully");
         
         return avg switch
         {
@@ -115,6 +143,7 @@ public class StudentService : IStudentService
     
     public IEnumerable<object> GroupStudentsByGrade()
     {
+        _logger.LogInformation("Students grouped by grade successfully");
         return _repository
             .GetAll()
             .GroupBy(student => student.Grade)
@@ -124,7 +153,5 @@ public class StudentService : IStudentService
                 Count = group.Count()
             });
     }
-    
-
 
 }

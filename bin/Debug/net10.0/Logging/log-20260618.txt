@@ -1,0 +1,12 @@
+2026-06-18 17:25:26 [INF] Student retrieved successfully by 1
+2026-06-18 17:25:26 [FTL] Application terminated unexpectedly
+System.ArgumentNullException: Value cannot be null. (Parameter 'logger')
+   at System.ArgumentNullException.Throw(String paramName)
+   at System.ArgumentNullException.ThrowIfNull(Object argument, String paramName)
+   at Microsoft.Extensions.Logging.LoggerExtensions.Log(ILogger logger, LogLevel logLevel, EventId eventId, Exception exception, String message, Object[] args)
+   at Microsoft.Extensions.Logging.LoggerExtensions.Log(ILogger logger, LogLevel logLevel, String message, Object[] args)
+   at Microsoft.Extensions.Logging.LoggerExtensions.LogInformation(ILogger logger, String message, Object[] args)
+   at StudentManagement.Core.Services.StudentService.AddStudent(Students student) in C:\Users\iprav\RiderProjects\StudentManagement\StudentManagement\Core\Services\StudentService.cs:line 37
+   at StudentManagement.Presentation.ConsoleMenu.AddStudent() in C:\Users\iprav\RiderProjects\StudentManagement\StudentManagement\Presentation\ConsoleMenu.cs:line 111
+   at StudentManagement.Presentation.ConsoleMenu.Start() in C:\Users\iprav\RiderProjects\StudentManagement\StudentManagement\Presentation\ConsoleMenu.cs:line 40
+   at Program.<Main>$(String[] args) in C:\Users\iprav\RiderProjects\StudentManagement\StudentManagement\Program.cs:line 43
